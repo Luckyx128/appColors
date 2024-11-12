@@ -1,5 +1,7 @@
 import React from 'react';
 import {
+    Alert,
+    Button,
     SafeAreaView,
     ScrollView,
     StatusBar,
@@ -17,15 +19,24 @@ import ColorCard from './components/colorCard';
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
+  function onPressEntrar(): void {
+      Alert.alert('Atenção!','Iniciando login')
+
+  }
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+
+  };
+
+  const inverseBackgroundStyle = {
+      inverseBackgroundColor:  isDarkMode ?  Colors.lighter : Colors.darker,
   };
 
   return (
 
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
-        style={[backgroundStyle]}>
+        style={ backgroundStyle }>
         <SafeAreaView style={styles.areaView}>
             <StatusBar
              barStyle={isDarkMode ? 'light-content' : 'dark-content'}
@@ -39,10 +50,16 @@ function App(): React.JSX.Element {
             <View style={styles.viewTwo}>
                 <Text>Seja muito bem vindo! </Text>
                 <TextInput
+                    style={{backgroundColor :inverseBackgroundStyle.inverseBackgroundColor}}
                 placeholder="Matricula:"
                 keyboardType={'numeric'}/>
                 <TextInput
-                placeholder="Senha:"/>
+                    style={{backgroundColor:inverseBackgroundStyle.inverseBackgroundColor}}
+                    secureTextEntry={true}
+                    placeholder="Senha:"
+                    textContentType="password"
+                />
+                <Button title="Entrar"  onPress={onPressEntrar}/>
             </View>
         </SafeAreaView>
       </ScrollView>
@@ -59,13 +76,23 @@ const styles = StyleSheet.create({
       display:'flex',
       flexDirection:'column',
       justifyContent:'center',
+      alignItems: 'center',
   },
     viewOne:{
         flexDirection:'row',
     },
     viewTwo:{
-        flex:1,
+      marginTop: '20%',
+      width:'50%',
+       gap:25,
+        paddingHorizontal:40,
+        paddingVertical:20,
+        backgroundColor:Colors.black,
+        borderRadius:10,
     },
+    enterButton:{
+      borderRadius:5,
+    }
 });
 
 export default App;
