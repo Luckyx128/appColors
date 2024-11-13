@@ -1,7 +1,7 @@
 import React from 'react';
 import {
     Alert,
-    Button,
+    Pressable,
     SafeAreaView,
     ScrollView,
     StatusBar,
@@ -25,18 +25,31 @@ function App(): React.JSX.Element {
   }
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-
+    color: isDarkMode ? Colors.lighter : Colors.lighter,
   };
 
   const inverseBackgroundStyle = {
-      inverseBackgroundColor:  isDarkMode ?  Colors.lighter : Colors.darker,
+      backgroundColorCard:{
+          backgroundColor: isDarkMode ?  '#002370' : 'red',
+      },
+      backgroundColorInput:{
+          borderStyle:'solid',
+          borderBottomColor:'white',
+          borderBottomWidth:1,
+      },
+      colorText:{
+          color: isDarkMode ? Colors.lighter : Colors.lighter,
+      },
+      backgroundColorButton:{
+          backgroundColor: isDarkMode ? '#fb7b44' : Colors.lighter,
+      },
   };
 
   return (
 
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
-        style={ backgroundStyle }>
+        style={backgroundStyle}>
         <SafeAreaView style={styles.areaView}>
             <StatusBar
              barStyle={isDarkMode ? 'light-content' : 'dark-content'}
@@ -47,19 +60,21 @@ function App(): React.JSX.Element {
                 <ColorCard color={'green'} text={'Card numero 2'}/>
                 <ColorCard color={'red'} text={'Card numero 3'}/>
             </View>
-            <View style={styles.viewTwo}>
-                <Text>Seja muito bem vindo! </Text>
+            <View style={[styles.viewTwo,inverseBackgroundStyle.backgroundColorCard]}>
+                <Text style={[inverseBackgroundStyle.colorText,styles.text]} >Seja muito bem vindo! </Text>
                 <TextInput
-                    style={{backgroundColor :inverseBackgroundStyle.inverseBackgroundColor}}
+                    style={inverseBackgroundStyle.backgroundColorInput}
                 placeholder="Matricula:"
                 keyboardType={'numeric'}/>
                 <TextInput
-                    style={{backgroundColor:inverseBackgroundStyle.inverseBackgroundColor}}
+                    style={inverseBackgroundStyle.backgroundColorInput}
                     secureTextEntry={true}
                     placeholder="Senha:"
                     textContentType="password"
                 />
-                <Button title="Entrar"  onPress={onPressEntrar}/>
+                <Pressable style={[styles.enterButton,inverseBackgroundStyle.backgroundColorButton]}   onPress={onPressEntrar}>
+                    <Text style={[inverseBackgroundStyle.colorText,styles.text]}>Entrar</Text>
+                </Pressable>
             </View>
         </SafeAreaView>
       </ScrollView>
@@ -92,7 +107,10 @@ const styles = StyleSheet.create({
     },
     enterButton:{
       borderRadius:5,
-    }
+    },
+    text:{
+        textAlign:'center',
+    },
 });
 
 export default App;
