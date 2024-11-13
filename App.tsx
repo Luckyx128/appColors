@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    Alert,
+    Alert, Dimensions,
     Pressable,
     SafeAreaView,
     ScrollView,
@@ -47,19 +47,12 @@ function App(): React.JSX.Element {
 
   return (
 
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
+
         <SafeAreaView style={styles.areaView}>
             <StatusBar
              barStyle={isDarkMode ? 'light-content' : 'dark-content'}
              backgroundColor={backgroundStyle.backgroundColor}
             />
-            <View style={styles.viewOne}>
-                <ColorCard color={'blue'} text={'Card numero 1'}/>
-                <ColorCard color={'green'} text={'Card numero 2'}/>
-                <ColorCard color={'red'} text={'Card numero 3'}/>
-            </View>
             <View style={[styles.viewTwo,inverseBackgroundStyle.backgroundColorCard]}>
                 <Text style={[inverseBackgroundStyle.colorText,styles.text]} >Seja muito bem vindo! </Text>
                 <TextInput
@@ -77,7 +70,6 @@ function App(): React.JSX.Element {
                 </Pressable>
             </View>
         </SafeAreaView>
-      </ScrollView>
 
   );
 }
@@ -88,8 +80,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
   },
   areaView:{
+      height:Dimensions.get('screen').height,
       display:'flex',
-      flexDirection:'column',
+      flexDirection:'row',
       justifyContent:'center',
       alignItems: 'center',
   },
@@ -97,9 +90,8 @@ const styles = StyleSheet.create({
         flexDirection:'row',
     },
     viewTwo:{
-      marginTop: '20%',
       width:'50%',
-       gap:25,
+        gap:25,
         paddingHorizontal:40,
         paddingVertical:20,
         backgroundColor:Colors.black,
